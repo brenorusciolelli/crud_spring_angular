@@ -1,7 +1,7 @@
 import { CoursesService } from './../services/courses.service';
 import { Course } from './../model/course';
 import { Component, OnInit } from '@angular/core';
-import { first, Observable, tap } from 'rxjs';
+import { delay, first, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -10,12 +10,13 @@ import { first, Observable, tap } from 'rxjs';
 })
 export class CoursesComponent implements OnInit {
 
-  courses:Observable<Course[]>;
+  courses$:Observable<Course[]>;
   displayedColumns = ['name', 'category'];
 
   constructor(private CoursesService: CoursesService) {
-    this.courses = this.CoursesService.list().pipe(
+    this.courses$ = this.CoursesService.list().pipe(
       first(),
+      delay(5000),
       tap(courses => console.log(courses))
     );
   }
