@@ -21,4 +21,10 @@ export class CoursesService {
   save(course: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, course).pipe(first());
   }
+
+  delete(course: Partial<Course>){
+     this.httpClient.delete(this.API).subscribe(data =>{
+      console.log(data);
+    });
+  }
 }
