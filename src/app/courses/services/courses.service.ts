@@ -27,4 +27,8 @@ export class CoursesService {
       console.log(data);
     });
   }
+
+  loadById(id: string) {
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
+  }
 }

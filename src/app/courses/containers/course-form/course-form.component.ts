@@ -1,7 +1,9 @@
+import { Course } from './../../model/course';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
 
@@ -21,7 +23,8 @@ export class CourseFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private _snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
     ) {
   }
 
@@ -30,7 +33,10 @@ export class CourseFormComponent implements OnInit {
 
   }
 
-  ngOnInit(): void { /* TODO document why this method 'ngOnInit' is empty */ }
+  ngOnInit(): void {
+    const course: Course = this.route.snapshot.data['course'];
+    console.log(course);
+  }
 
   onSubimit() {
     this.service.save(this.form.value).subscribe({
